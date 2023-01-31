@@ -5,7 +5,7 @@ from calignment cimport AlignedPair
 # from pysam.libcalignedsegment cimport AlignmentFile
 
 
-from telescope.utils.helpers import merge_blocks
+from lasTEq.utils.helpers import merge_blocks
 
 
 __author__ = 'Sojung LEE'
