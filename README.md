@@ -17,7 +17,7 @@ Recommended command line is written in bash file (`run_sample.sh`).
 bash run_sample.sh will generate result.
 
 ## Usage
-* [`telescope bulk assign`](#telescope-assign)
+* [`lasTEq bulk assign`](#lasTEq-assign)
 ```
 Input Options:
 
