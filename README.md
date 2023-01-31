@@ -26,7 +26,7 @@ Input Options:
                         alignments for a read pair appear sequentially in the
                         file.
   gtffile               Path to annotation file (GTF format)
-  --long_read LONG_READ
+  long_read
                         Path to long read file that contains transcript name and TPM fraction
                         (default: None)
   --attribute ATTRIBUTE
