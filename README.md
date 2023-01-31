@@ -72,11 +72,6 @@ Reporting Options:
                         included in the lasTEq report by default. This
                         argument determines what mode will be used for the
                         "final counts" column. (default: exclude)
-  --use_every_reassign_mode (single-cell only)
-                        Whether to output count matrices using every reassign mode. 
-                        If specified, six output count matrices will be generated, 
-                        corresponding to the six possible reassignment methods (all, exclude, 
-                        choose, average, conf, unique). (default: False)
   --conf_prob CONF_PROB
                         Minimum probability for high confidence assignment.
                         (default: 0.9)
@@ -100,9 +95,6 @@ Reporting Options:
                         (RF - read 1 reverse strand, read 2 forward strand) and
                         single end reads (F - forward strand) with respect to the 
                         generating transcript. (default: None)
-  --barcode_tag (single-cell only)
-                        String specifying the name of the field in the BAM/SAM 
-                        file containing the barcode for each read. (default: CB)
 Model Parameters:
 
   --pi_prior PI_PRIOR   Prior on π. Equivalent to adding n unique reads.
