@@ -7,8 +7,8 @@ conda activate lasTEq \
 git clone https://github.com/jasonwong-lab/lasTEq \
 python3 setup.py build | python3 setup.py install \
 lasTEq bulk assign -h
-```
 
+```
 ## Testing
 
 A BAM file (`sample_alignment_sort.bam`), annotation (`annotation.gtf`) and long read TPM file (`long_read_data.txt`) are included in
@@ -129,8 +129,7 @@ Model Parameters:
                         criteria. (default: False)
   --skip_em             Exits after loading alignment and saving checkpoint
                         file. (default: False)
-```
-                        
+```                   
 ## Output
 
 lasTEq has three main output files: the transcript counts estimated via EM (`lasteq-TE_counts.tsv`).
