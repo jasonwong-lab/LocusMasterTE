@@ -1,5 +1,6 @@
 ## Installation
 
+```
 conda create -n lasTEq python=3.6 future pyyaml cython=0.29.7 \
   numpy=1.16.3 pandas=1.1.3 scipy=1.2.1 pysam=0.15.2 htslib=1.9 intervaltree=3.0.2
 
@@ -7,7 +8,6 @@ conda activate lasTEq \
 git clone https://github.com/jasonwong-lab/lasTEq \
 python3 setup.py build | python3 setup.py install \
 lasTEq bulk assign -h
-
 ```
 ## Testing
 
@@ -17,7 +17,7 @@ Recommended command line is written in bash file (`run_sample.sh`).
 bash run_sample.sh will generate result.
 
 ## Usage
-
+* [`telescope bulk assign`](#telescope-assign)
 ```
 Input Options:
 
