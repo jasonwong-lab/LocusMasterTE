@@ -132,6 +132,5 @@ Model Parameters:
 ```                   
 ## Output
 
-lasTEq has three main output files: the transcript counts estimated via EM (`lasteq-TE_counts.tsv`).
-The count file is most important for downstream differential.
-expression analysis. The updated SAM file is useful for downstream locus-specific analyses.
+lasTEq has three main output files: the transcript counts estimated via EM (`lasteq-TE_counts.tsv`).\
+The count file is most important for downstream analysis.
