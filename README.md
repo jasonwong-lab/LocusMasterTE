@@ -38,8 +38,6 @@ Input Options:
                         Used internally to represent alignments. Must be
                         different from all other feature names. (default:
                         __no_feature)
-  --ncpu NCPU           Number of cores to use. (Multiple cores not supported
-                        yet). (default: 1)
   --tempdir TEMPDIR     Path to temporary directory. Temporary files will be
                         stored here. Default uses python tempfile package to
                         create the temporary directory. (default: None)
