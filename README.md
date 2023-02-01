@@ -22,7 +22,7 @@ Recommended command line is written in bash file (`run_sample.sh`).\
 
 lasTEq was built upon Telescope. Additional arguments are elaborated.
 
-# Added Input Options:
+### Added Input Options:
 
 ```
   long_read
@@ -66,7 +66,7 @@ Model Parameters:
                         (default: subfamily)
 ```
 
-# Arguments from Telescope:
+### Arguments from Telescope:
 
 ```
   samfile               Path to alignment file. Alignment file can be in SAM
