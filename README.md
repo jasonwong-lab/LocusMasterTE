@@ -15,7 +15,7 @@ lasTEq bulk assign -h
 A BAM file (`sample_alignment_sort.bam`), annotation (`annotation.gtf`) and long read TPM file (`long_read_data.txt`) are included in
 lasTEq/data folder. \
 Recommended command line is written in bash file (`run_sample.sh`).\
-```bash run_sample.sh```
+```bash lasTEq/data/run_sample.sh```
 
 ## Usage
 * [`lasTEq bulk assign`]
