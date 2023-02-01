@@ -17,7 +17,7 @@ import shutil
 
 import numpy as np
 
-from telescope_scripts import utils
+from .telescope_scripts import utils
 from . import model
 
 from telescope_scripts.utils.helpers import format_minutes as fmtmins
