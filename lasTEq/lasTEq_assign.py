@@ -20,9 +20,9 @@ import numpy as np
 from .telescope_scripts import utils
 from . import model
 
-from telescope_scripts.utils.helpers import format_minutes as fmtmins
+from .telescope_scripts.utils.helpers import format_minutes as fmtmins
 from .model import lasTEq, lasTEqLikelihood
-from telescope_scripts.utils.annotation import get_annotation_class
+from .telescope_scripts.utils.annotation import get_annotation_class
 
 __author__ = 'Sojung LEE, Matthew L. Bendall'
 __copyright__ = "Copyright (C) 2023 Sojung LEE, Matthew L. Bendall"
