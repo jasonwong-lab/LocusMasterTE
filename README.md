@@ -22,8 +22,9 @@ Recommended command line is written in bash file (`run_sample.sh`).\
 
 lasTEq was built upon Telescope. Additional arguments are elaborated.
 
+# Added Input Options:
+
 ```
-Added Input Options:
   long_read
                         Mandatory argument. Path to long read file that contains transcript name and TPM fraction
                         (default: None)
@@ -65,9 +66,9 @@ Model Parameters:
                         (default: subfamily)
 ```
 
-```
-Arguents from Telescope:
+# Arguments from Telescope:
 
+```
   samfile               Path to alignment file. Alignment file can be in SAM
                         or BAM format. File must be collated so that all
                         alignments for a read pair appear sequentially in the
