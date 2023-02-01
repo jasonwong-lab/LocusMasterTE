@@ -28,8 +28,8 @@ htslib_include_dirs = [d for d in htslib_include_dirs if path.exists(str(d)) ]
 
 ext = '.pyx' if USE_CYTHON else '.c'
 extensions = [
-    Extension("telescope_scripts.utils.calignment",
-              ["telescope_scripts/utils/calignment"+ext],
+    Extension("lasTEq.telescope_scripts.utils.calignment",
+              ["lasTEq/telescope_scripts/utils/calignment"+ext],
               include_dirs=htslib_include_dirs,
               ),
 ]
