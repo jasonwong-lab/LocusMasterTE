@@ -9,6 +9,7 @@ git clone https://github.com/jasonwong-lab/lasTEq
 python3 setup.py build | python3 setup.py install 
 lasTEq bulk assign -h
 ```
+
 ## Testing
 
 A BAM file (`sample_alignment_sort.bam`), annotation (`annotation.gtf`) and long read TPM file (`long_read_data.txt`) are included in
@@ -17,18 +18,61 @@ Recommended command line is written in bash file (`run_sample.sh`).\
 ```bash run_sample.sh```
 
 ## Usage
-* [`lasTEq bulk assign`](#lasTEq-assign)
+* [`lasTEq bulk assign`]
+
+lasTEq was built upon Telescope. Additional arguments are elaborated.
+
 ```
-Input Options:
+Added Input Options:
+  long_read
+                        Mandatory argument. Path to long read file that contains transcript name and TPM fraction
+                        (default: None)
+  Run Modes:
+
+  --reassign_mode {exclude,choose,average,conf,unique,long_read}
+                        Reassignment mode. After EM is complete, each fragment
+                        is reassigned according to the expected value of its
+                        membership weights. The reassignment method is the
+                        method for resolving the "best" reassignment for
+                        fragments that have multiple possible reassignments.
+                        Available modes are: "exclude" - fragments with
+                        multiple best assignments are excluded from the final
+                        counts; "choose" - the best assignment is randomly
+                        chosen from among the set of best assignments;
+                        "average" - the fragment is divided evenly among the
+                        best assignments; "conf" - only assignments that
+                        exceed a certain threshold (see --conf_prob) are
+                        accepted; "unique" - only uniquely aligned reads are
+                        included. "long_read" - use long read to determine best hit.
+                        NOTE: Results using all assignment modes are
+                        included in the lasTEq report by default. This
+                        argument determines what mode will be used for the
+                        "final counts" column. (default: exclude)
+
+Model Parameters:
+
+  --rescue_short RESCUE_SHORT
+                        To rescue features only captured by short, values can be given to 0 expression captured in long read.
+                        (default: 0)
+  --prior_change {all,theta,none}
+                        Integration of TPM counts from long reads. All represents change in both pi and theta.
+                        Change in theta influences only multimapping counts.
+                        None is equivalent to not integrating long read
+                        (default: none)
+  --fraction_calc_mode_for_long {multi,subfamily}
+                        Subfamily calculates TPM fraction = TPM counts / TPM counts for each subfamily
+                        Multi calculates TPM fraction = TPM counts / TPM counts for only multimapped transcript per reads.
+                        (default: subfamily)
+```
+
+```
+Arguents from Telescope:
 
   samfile               Path to alignment file. Alignment file can be in SAM
                         or BAM format. File must be collated so that all
                         alignments for a read pair appear sequentially in the
                         file.
   gtffile               Path to annotation file (GTF format)
-  long_read
-                        Path to long read file that contains transcript name and TPM fraction
-                        (default: None)
   --attribute ATTRIBUTE
                         GTF attribute that defines a transposable element
                         locus. GTF features that share the same value for
@@ -52,26 +96,6 @@ Reporting Options:
   --updated_sam         Generate an updated alignment file. (default: False)
   
   Run Modes:
-
-  --reassign_mode {exclude,choose,average,conf,unique,long_read}
-                        Reassignment mode. After EM is complete, each fragment
-                        is reassigned according to the expected value of its
-                        membership weights. The reassignment method is the
-                        method for resolving the "best" reassignment for
-                        fragments that have multiple possible reassignments.
-                        Available modes are: "exclude" - fragments with
-                        multiple best assignments are excluded from the final
-                        counts; "choose" - the best assignment is randomly
-                        chosen from among the set of best assignments;
-                        "average" - the fragment is divided evenly among the
-                        best assignments; "conf" - only assignments that
-                        exceed a certain threshold (see --conf_prob) are
-                        accepted; "unique" - only uniquely aligned reads are
-                        included. "long_read" - use long read to determine best hit.
-                        NOTE: Results using all assignment modes are
-                        included in the lasTEq report by default. This
-                        argument determines what mode will be used for the
-                        "final counts" column. (default: exclude)
   --conf_prob CONF_PROB
                         Minimum probability for high confidence assignment.
                         (default: 0.9)
@@ -102,18 +126,6 @@ Model Parameters:
   --theta_prior THETA_PRIOR
                         Prior on θ. Equivalent to adding n non-unique reads.
                         (default: 200000)
-  --rescue_short RESCUE_SHORT
-                        To rescue features only captured by short, values can be given to 0 expression captured in long read.
-                        (default: 0)
-  --prior_change {all,theta,none}
-                        Integration of TPM counts from long reads. All represents change in both pi and theta.
-                        Change in theta influences only multimapping counts.
-                        None is equivalent to not integrating long read
-                        (default: none)
-  --fraction_calc_mode_for_long {multi,subfamily}
-                        Subfamily calculates TPM fraction = TPM counts / TPM counts for each subfamily
-                        Multi calculates TPM fraction = TPM counts / TPM counts for only multimapped transcript per reads.
-                        (default: subfamily)
   --em_epsilon EM_EPSILON
                         EM Algorithm Epsilon cutoff (default: 1e-7)
   --max_iter MAX_ITER   EM Algorithm maximum iterations (default: 100)
