@@ -171,25 +171,21 @@ class lasTEq(object):
             lg.debug(str("Long Read input is required"))
         else:
             long_read = pd.read_csv(self.long_read, sep='\t')
-            print("taking time?")
             long_read = long_read.dropna()
 
             ### remove those with 0 expression
             long_read = long_read.loc[~(long_read.iloc[:,1] == 0)]
 
             temp_diff = list(set(_feat_list) - set(long_read.iloc[:,0]))
-            print("taking time?")
 
             temp_diff = pd.DataFrame(temp_diff)
             temp_diff['value'] = 0
             temp_diff['value2'] = 0
             temp_common = long_read[long_read.iloc[:,0].isin(_feat_list)]
-            print("taking time?")
 
             temp_common = pd.DataFrame(temp_common)
             temp_common.columns = ["TE name", "TPM Fraction", "subF Name"]
             temp_diff.columns = ["TE name", "TPM Fraction", "subF Name"]
-            print("taking time?")
 
             final_long_read = pd.concat([temp_common,temp_diff], axis=0)
             final_long_read.sort_values(by="TE name", key=lambda column: column.map(lambda e: _feat_list.index(e)), inplace=True)
