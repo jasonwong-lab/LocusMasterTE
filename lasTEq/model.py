@@ -202,10 +202,8 @@ class lasTEq(object):
 
             if self.fraction_calc_mode_for_long == "multi":
                 final_long_read = final_long_read.iloc[:,[0,1]]
-                print(final_long_read)
             
             if len(final_long_read) == len(_feat_list):
-                print("finish")
                 return final_long_read
             else:
                 print("Number of Transcript does not match")
