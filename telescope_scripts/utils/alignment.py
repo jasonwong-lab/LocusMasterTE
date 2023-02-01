@@ -12,7 +12,7 @@ import logging as lg
 
 import pysam
 
-from .calignment import AlignedPair
+from telescope_scripts.utils.calignment import AlignedPair
 from lasTEq import model
 from . import BIG_INT
 
