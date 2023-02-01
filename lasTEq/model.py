@@ -17,13 +17,13 @@ import numpy as np
 import scipy
 import pysam
 
-from telescope_scripts.utils.sparse_plus import csr_matrix_plus as csr_matrix
+from ..telescope_scripts.utils.sparse_plus import csr_matrix_plus as csr_matrix
 
-from telescope_scripts.utils.colors import c2str, D2PAL, GPAL
-from telescope_scripts.utils.helpers import str2int, region_iter, phred
+from ..telescope_scripts.utils.colors import c2str, D2PAL, GPAL
+from ..telescope_scripts.utils.helpers import str2int, region_iter, phred
 
-from telescope_scripts.utils import alignment
-from telescope_scripts.utils import BIG_INT
+from ..telescope_scripts.utils import alignment
+from . import BIG_INT
 
 __author__ = 'Sojung LEE, Matthew L. Bendall'
 __copyright__ = "Copyright (C) 2023 Sojung LEE, Matthew L. Bendall"
