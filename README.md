@@ -27,7 +27,8 @@ lasTEq was built upon Telescope. Additional arguments are elaborated.
 
 ```
   long_read
-                        Mandatory argument. Path to long read file that contains transcript name and TPM fraction
+                        Mandatory argument. Path to long read file composed of three columns: "Geneid", "TPM", and "subF". 
+                        "Geneid" represents TE individual names followed by TPM values in "TPM" coulmn. Belogned subfamily information from RepeatMasker                           database goes under "subF".
                         (default: None)
   Run Modes:
 
