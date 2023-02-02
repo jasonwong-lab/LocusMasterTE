@@ -677,13 +677,13 @@ class lasTEqLikelihood(object):
                 long_tpm_df = _n
                 long_tpm_df[long_tpm_df>0] = 1
                 long_tpm_df = long_tpm_df.multiply(long_read_np)
+                print(long_tpm_df)
                 sums = np.asarray(long_tpm_df.sum(axis=1)).squeeze()
                 long_tpm_df.data /= sums[long_tpm_df.nonzero()[0]]
                 long_tpm_df = csr_matrix(long_tpm_df)
                 _n = _n.multiply(long_tpm_df)
             elif self.long_read_integration_mode == "theta":
-                print("currently no option availble for pi")
-                long_tpm_df = _amb
+                long_tpm_df = csr_matrix(_amb)
                 long_tpm_df[long_tpm_df>0] = 1
                 long_tpm_df = long_tpm_df.multiply(long_read_np)
                 sums = np.asarray(long_tpm_df.sum(axis=1)).squeeze()
