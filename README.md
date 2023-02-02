@@ -23,7 +23,7 @@ Recommended command line is written in bash file (`run_sample.sh`).
 
 lasTEq was built upon Telescope. Additional arguments are elaborated.
 
-### Added Input Options:
+### lasTEq exclusive options:
 
 ```
   long_read
