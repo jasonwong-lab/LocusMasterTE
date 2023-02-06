@@ -163,6 +163,16 @@ class BulkIDOptions(IDOptions):
                   is recommended to set this prior to a large value. This
                   increases the penalty for non-unique reads and improves
                   accuracy.
+        - balance_weight:
+            type: float
+            default: 0.5
+            help: >
+                  Input ranges from 0 to 1.
+                  Weight paramter to balance the prior (from long-read) and likelihood (from short-read).
+                  By default set as "0.5", meaning 1:1 ratio reliance on both short-read and long-read.
+                  Higher the number is more reliance on long-read.
+                  "0" equivalent to Short-read TE quantification without long-read information aided.
+                  "1" equivalent to Long-read TE quantification outputting long-read TPM counts.
         - rescue_short:
             type: float
             default: 0
@@ -219,6 +229,8 @@ def run(args):
     total_time = time()
 
     ''' Create lasTEq object '''
+    if opts.balance_weight > 1:
+        sys.exit('balance_weight should be in between 0 and 1.')
     ts = lasTEq(opts)
 
     ''' Load annotation '''
