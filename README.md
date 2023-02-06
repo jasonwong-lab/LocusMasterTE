@@ -71,6 +71,12 @@ Model Parameters:
                         Subfamily calculates TPM fraction = TPM counts / TPM counts for each subfamily
                         Multi calculates TPM fraction = TPM counts / TPM counts for only multimapped transcript per reads.
                         (default: subfamily)
+  - balance_weight {float between 0 and 1}
+                        Weight paramter to balance the prior (from long-read) and likelihood (from short-read).
+                        By default set as "0.5", meaning 1:1 ratio reliance on both short-read and long-read.
+                        Higher the number is more reliance on long-read.
+                        "0" equivalent to Short-read TE quantification without long-read information aided.
+                        "1" equivalent to Long-read TE quantification outputting long-read TPM counts.
 ```
 
 ### Arguments from Telescope:
