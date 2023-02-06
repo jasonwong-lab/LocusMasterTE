@@ -99,6 +99,7 @@ class lasTEq(object):
         self.shape = None              # Fragments x Features
         self.raw_scores = None         # Initial alignment scores
 
+
         # BAM with non overlapping fragments (or unmapped)
         self.other_bam = opts.outfile_path('other.bam')
         # BAM with overlapping fragments
@@ -120,6 +121,8 @@ class lasTEq(object):
         self.long_read = opts.long_read
         self.fraction_calc_mode_for_long = opts.fraction_calc_mode_for_long
         self.rescue_short = opts.rescue_short
+        self.balance_weight = opts.balance_weight        
+
         return
 
     def save(self, filename):
@@ -207,6 +210,7 @@ class lasTEq(object):
                 return final_long_read
             else:
                 print("Number of Transcript does not match")
+                exit
 
 
     def get_random_seed(self):
@@ -258,7 +262,6 @@ class lasTEq(object):
                 _minAS = min(_minAS, m[3])
                 _maxAS = max(_maxAS, m[3])
                 print('\t'.join(map(str, m)), file=fh)
-
         fh.close()
         
         return mfile, (_minAS, _maxAS), _unaligned
@@ -459,10 +462,18 @@ class lasTEq(object):
         _stats_report = _stats_report.round(_stats_rounding)
 
         # Report information for transcript counts
-        _counts0 = {
-            'transcript': _fnames,  # transcript
-            'count': tl.reassign(_rmethod, _rprob).sum(0).A1 # final_count
+        if(self.balance_weight == 1):
+            long_read = pd.read_csv(self.long_read, sep='\t')
+            long_read = long_read.dropna()
+            _counts0 = {
+            'transcript': long_read.iloc[:,0],  # transcript
+            'count': long_read.iloc[:,1] # final_count
         }
+        else:
+            _counts0 = {
+                'transcript': _fnames,  # transcript
+                'count': tl.reassign(_rmethod, _rprob).sum(0).A1 # final_count
+            }
 
         # Rotate the report
         _counts = pd.DataFrame(_counts0)
@@ -634,6 +645,7 @@ class lasTEqLikelihood(object):
         self.long_read = long_read
         self.long_read_integration_mode = opts.prior_change
         self.fraction_calc_mode_for_long = opts.fraction_calc_mode_for_long
+        self.balance_weight = opts.balance_weight        
 
         # Precalculated values
         self._weights = self.Q.max(1)             # Weight assigned to each fragment
@@ -674,23 +686,34 @@ class lasTEqLikelihood(object):
             long_read_np = csr_matrix(long_read_np)
             ### give option during integration
             if self.long_read_integration_mode == "all":
-                long_tpm_df = _n
-                long_tpm_df[long_tpm_df>0] = 1
-                long_tpm_df = long_tpm_df.multiply(long_read_np)
-                print(long_tpm_df)
-                sums = np.asarray(long_tpm_df.sum(axis=1)).squeeze()
-                long_tpm_df.data /= sums[long_tpm_df.nonzero()[0]]
-                long_tpm_df = csr_matrix(long_tpm_df)
-                _n = _n.multiply(long_tpm_df)
+                if(self.balance_weight == 0 or self.balance_weight == 1):
+                    _n = _n
+                else:
+                    long_tpm_df = _n
+                    long_tpm_df[long_tpm_df>0] = 1
+                    long_tpm_df = long_tpm_df.multiply(long_read_np)
+                    sums = np.asarray(long_tpm_df.sum(axis=1)).squeeze()
+                    long_tpm_df.data /= sums[long_tpm_df.nonzero()[0]]
+                    long_tpm_df = csr_matrix(long_tpm_df)
+                    left_balance_weight = 1-self.balance_weight
+                    long_tpm_df = (self.balance_weight/left_balance_weight) * long_tpm_df
+                    _n = _n.multiply(long_tpm_df)
             elif self.long_read_integration_mode == "theta":
-                long_tpm_df = csr_matrix(_amb)
-                long_tpm_df[long_tpm_df>0] = 1
-                long_tpm_df = long_tpm_df.multiply(long_read_np)
-                sums = np.asarray(long_tpm_df.sum(axis=1)).squeeze()
-                long_tpm_df.data /= sums[long_tpm_df.nonzero()[0]]
-                long_tpm_df = csr_matrix(long_tpm_df)
-                _amb = _amb.multiply(long_tpm_df)
-                _n = csr_matrix(_amb + _uni)
+                if(self.balance_weight == 0 or self.balance_weight == 1):
+                    _n = _n
+                    _amb = _amb
+                    _uni = _uni
+                else:
+                    long_tpm_df = csr_matrix(_amb)
+                    long_tpm_df[long_tpm_df>0] = 1
+                    long_tpm_df = long_tpm_df.multiply(long_read_np)
+                    sums = np.asarray(long_tpm_df.sum(axis=1)).squeeze()
+                    long_tpm_df.data /= sums[long_tpm_df.nonzero()[0]]
+                    long_tpm_df = csr_matrix(long_tpm_df)
+                    left_balance_weight = 1-self.balance_weight
+                    long_tpm_df = (self.balance_weight/left_balance_weight) * long_tpm_df
+                    _amb = _amb.multiply(long_tpm_df)
+                    _n = csr_matrix(_amb + _uni)
             else:
                 _n = _n
                 _amb = _amb
@@ -723,10 +746,21 @@ class lasTEqLikelihood(object):
             long_read_np = np.array(self.long_read.iloc[:, 2])
             ### give option during integration
             if self.long_read_integration_mode == "all":
-                _pi_hat = np.multiply(_pi_hat, long_read_np)
-                _theta_hat = np.multiply(_theta_hat, long_read_np)
+                if(self.balance_weight == 0 or self.balance_weight == 1):
+                    _pi_hat = _pi_hat
+                    _theta_hat = _theta_hat
+                else:
+                    left_balance_weight = 1-self.balance_weight
+                    long_read_np = (self.balance_weight/left_balance_weight) * long_read_np
+                    _pi_hat = np.multiply(_pi_hat, long_read_np)
+                    _theta_hat = np.multiply(_theta_hat, long_read_np)
             elif self.long_read_integration_mode == "theta":
-                _theta_hat = np.multiply(_theta_hat, long_read_np)
+                if(self.balance_weight == 0 or self.balance_weight == 1):
+                    _theta_hat = _theta_hat
+                else:
+                    left_balance_weight = 1-self.balance_weight
+                    long_read_np = (self.balance_weight/left_balance_weight) * long_read_np
+                    _theta_hat = np.multiply(_theta_hat, long_read_np)
             else:
                 _pi_hat = _pi_hat
                 _theta_hat = _theta_hat
