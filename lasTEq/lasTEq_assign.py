@@ -163,16 +163,6 @@ class BulkIDOptions(IDOptions):
                   is recommended to set this prior to a large value. This
                   increases the penalty for non-unique reads and improves
                   accuracy.
-        - balance_weight:
-            type: float
-            default: 0.5
-            help: >
-                  Input ranges from 0 to 1.
-                  Weight paramter to balance the prior (from long-read) and likelihood (from short-read).
-                  By default set as "0.5", meaning 1:1 ratio reliance on both short-read and long-read.
-                  Higher the number is more reliance on long-read.
-                  "0" equivalent to Short-read TE quantification without long-read information aided.
-                  "1" equivalent to Long-read TE quantification outputting long-read TPM counts.
         - rescue_short:
             type: float
             default: 0
@@ -188,15 +178,6 @@ class BulkIDOptions(IDOptions):
                   Integration of TPM counts from long reads. All represents change in both pi and theta. 
                   Change in theta influences only multimapping counts.
                   None is equivalent to not integrating long read.
-        - fraction_calc_mode_for_long:
-            type: str
-            default: subfamily
-            choices:
-                - multi
-                - subfamily
-            help: >
-                  Subfamily calculates TPM fraction = TPM counts / TPM counts for each subfamily
-                  Multi calculates TPM fraction = TPM counts / TPM counts for only multimapped transcript per reads.
         - em_epsilon:
             type: float
             default: 1e-7
@@ -229,8 +210,6 @@ def run(args):
     total_time = time()
 
     ''' Create lasTEq object '''
-    if opts.balance_weight > 1:
-        sys.exit('balance_weight should be in between 0 and 1.')
     ts = lasTEq(opts)
 
     ''' Load annotation '''
