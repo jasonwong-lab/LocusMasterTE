@@ -67,10 +67,6 @@ Model Parameters:
                         Change in theta influences only multimapping counts.
                         None is equivalent to not integrating long read
                         (default: none)
-  --fraction_calc_mode_for_long {multi,subfamily}
-                        Subfamily calculates TPM fraction = TPM counts / TPM counts for each subfamily
-                        Multi calculates TPM fraction = TPM counts / TPM counts for only multimapped transcript per reads.
-                        (default: subfamily)
   --balance_weight {float between 0 and 1}
                         Weight paramter to balance the prior (from long-read) and likelihood (from short-read).
                         By default set as "0.5", meaning 1:1 ratio reliance on both short-read and long-read.
