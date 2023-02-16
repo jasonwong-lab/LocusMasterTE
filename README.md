@@ -17,7 +17,6 @@ lasTEq bulk assign -h
 ## Testing
 ```bash lasTEq/data/run_sample.sh```
 
-
 A BAM file (`sample_alignment_sort.bam`), annotation (`annotation.gtf`) and long read TPM file (`long_read_data.txt`) are included in
 lasTEq/data folder. \
 Recommended command line is written in bash file (`run_sample.sh`).
@@ -62,14 +61,22 @@ Model Parameters:
   --rescue_short RESCUE_SHORT
                         To rescue features only captured by short, values can be given to 0 expression captured in long read.
                         (default: 0)
+  --long_read_type {matched,unmatched}
+                        Input whether cell or tissue type of long-read is matched to that of short-read
+                        It is recommended to use "matched" only when you have matched cell types or tissue samples for long-read and short-read
+                        (default: matched)
+  --long_read_weight {float}
+                        Only availble when choosing "unmatched" in integration mode. Weights on long-read information.
+                        Useful when using different tissue samples.
+                        (default: 0.1)
   --prior_change {all,theta,none}
                         Integration of TPM counts from long reads. All represents change in both pi and theta.
                         Change in theta influences only multimapping counts.
                         None is equivalent to not integrating long read
-                        (default: none)
-```
+                        (default: all)
 
-### Arguments from Telescope:
+<details>
+<summary>Arguments from Telescope</summary>
 
 ```
   samfile               Path to alignment file. Alignment file can be in SAM
@@ -137,7 +144,9 @@ Model Parameters:
                         criteria. (default: False)
   --skip_em             Exits after loading alignment and saving checkpoint
                         file. (default: False)
-```                   
+```       
+</details>
+
 ## Output
 
 lasTEq has three main output files: the transcript counts estimated via EM (`lasteq-TE_counts.tsv`).\
