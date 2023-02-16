@@ -76,8 +76,9 @@ Model Parameters:
                         (default: all)
 ```
 
+### Arguments from Telescope
 <details>
-<summary>Arguments from Telescope</summary>
+<summary>From Telescope</summary>
 
 ```
   samfile               Path to alignment file. Alignment file can be in SAM
