@@ -59,18 +59,24 @@ lasTEq was built upon Telescope. Additional arguments are elaborated.
 Model Parameters:
 
   --rescue_short RESCUE_SHORT
-                        To rescue features only captured by short, values can be given to 0 expression captured in long read.
+                        To rescue features only captured by short, 
+                        values can be given to 0 expression captured in long read.
                         (default: 0)
   --long_read_type {matched,unmatched}
-                        Input whether cell or tissue type of long-read is matched to that of short-read
-                        It is recommended to use "matched" only when you have matched cell types or tissue samples for long-read and short-read
+                        Input whether cell or tissue type of long-read 
+                        is matched to that of short-read
+                        It is recommended to use "matched" 
+                        only when you have matched cell types or tissue samples 
+                        for long-read and short-read
                         (default: matched)
   --long_read_weight {float}
-                        Only availble when choosing "unmatched" in integration mode. Weights on long-read information.
+                        Only availble when choosing "unmatched" in integration mode. 
+                        Weights on long-read information.
                         Useful when using different tissue samples.
                         (default: 0.1)
   --prior_change {all,theta,none}
-                        Integration of TPM counts from long reads. All represents change in both pi and theta.
+                        Integration of TPM counts from long reads. 
+                        All represents change in both pi and theta.
                         Change in theta influences only multimapping counts.
                         None is equivalent to not integrating long read
                         (default: all)
