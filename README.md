@@ -75,8 +75,9 @@ Model Parameters:
                         None is equivalent to not integrating long read
                         (default: all)
 ```
+
 <details>
-<summary>### Arguments from Telescope</summary>
+<summary>Arguments from Telescope</summary>
 
 ```
   samfile               Path to alignment file. Alignment file can be in SAM
