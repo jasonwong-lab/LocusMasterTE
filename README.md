@@ -74,7 +74,7 @@ Model Parameters:
                         Change in theta influences only multimapping counts.
                         None is equivalent to not integrating long read
                         (default: all)
-
+```
 <details>
 <summary>Arguments from Telescope</summary>
 
