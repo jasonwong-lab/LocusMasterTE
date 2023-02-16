@@ -72,7 +72,7 @@ Model Parameters:
                         (default: matched)
   --long_read_weight {float}
                         Only availble when choosing "unmatched" in integration mode. 
-                        Weights on long-read information.
+                        Weights on long-read information, holding no limited numeric ranges.
                         Useful when using different tissue samples.
                         (default: 0.1)
   --prior_change {all,theta,none}
