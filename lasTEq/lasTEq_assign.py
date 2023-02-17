@@ -163,13 +163,18 @@ class BulkIDOptions(IDOptions):
                   is recommended to set this prior to a large value. This
                   increases the penalty for non-unique reads and improves
                   accuracy.
+        - long_read_weight:
+            type: float
+            default: 1
+            help: No limited numeric ranges. Weights on long-read information.
+                  Useful when using different tissue samples.
         - rescue_short:
             type: float
             default: 0
             help: To rescue features only captured by short, values can be given to 0 expression captured in long read
         - prior_change:
             type: str
-            default: none
+            default: all
             choices:
                 - all
                 - theta
