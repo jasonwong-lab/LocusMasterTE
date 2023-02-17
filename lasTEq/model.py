@@ -174,14 +174,18 @@ class lasTEq(object):
         else:
             long_read = pd.read_csv(self.long_read, sep='\t')
             long_read = long_read.dropna()
-
+            temp = long_read
             ### remove those with 0 expression
             long_read = long_read.loc[~(long_read.iloc[:,1] == 0)]
 
             temp_diff = list(set(_feat_list) - set(long_read.iloc[:,0]))
+            temp_diff = temp[temp.iloc[:,0].isin(temp_diff)]
+
             temp_diff = pd.DataFrame(temp_diff)
-            temp_diff['value'] = 0
-            temp_diff['value2'] = 0
+            temp_diff.loc[-1] = ['__no_feature', 0, 0]  # adding a row
+            temp_diff.index = temp_diff.index + 1  # shifting index
+            temp_diff.sort_index(inplace=True)
+
             temp_common = long_read[long_read.iloc[:,0].isin(_feat_list)]
             temp_common = pd.DataFrame(temp_common)
             temp_common.columns = ["TE name", "TPM Fraction", "subF Name"]
@@ -631,7 +635,8 @@ class lasTEqLikelihood(object):
 
         ## CHANGE add one more prior values
         self.long_read = long_read
-        self.long_read_integration_mode = opts.prior_change
+        self.prior_change = opts.prior_change
+        self.long_read_weight = opts.long_read_weight
 
         # Precalculated values
         self._weights = self.Q.max(1)             # Weight assigned to each fragment
@@ -642,7 +647,7 @@ class lasTEqLikelihood(object):
         # Weighted prior values
         self._pi_prior_wt = self.pi_prior * self._weights.max()
         self._theta_prior_wt = self.theta_prior * self._weights.max()
-        #
+
         self._pisum0 = self.Q.multiply(1-self.Y).sum(0)
         lg.debug('done initializing model')
 
@@ -672,27 +677,45 @@ class lasTEqLikelihood(object):
         #####  CHANGE START HERE !!! #####
         ### add prior for pi_hat and theta_hat
         ### calculate TPM fraction based on mode selection
-        # Estimate theta_hat
-        _thetasum = _weighted.multiply(self.Y).sum(0)
-        _theta_denom = self._ambig_wt + self._theta_prior_wt * self.K
-        _theta_hat = (_thetasum + self._theta_prior_wt) / _theta_denom
+        # When matched long-read is inputted
 
-        # Estimate pi_hat
-        _pisum = self._pisum0 + _thetasum
-        _pi_denom = self._total_wt + self._pi_prior_wt * self.K
-        _pi_hat = (_pisum + self._pi_prior_wt) / _pi_denom
+        if self.prior_change == "all":
+           long_weight = self.long_read_weight * self._ambig_wt
+           long_read_np = np.array(self.long_read.iloc[:, 2])
+           long_read_np = long_weight * long_read_np
+           _thetasum = _weighted.multiply(self.Y).sum(0)
+           _theta_denom = self._ambig_wt + self._theta_prior_wt * self.K
+           _theta_hat = (_thetasum + self._theta_prior_wt + long_read_np) / _theta_denom
+           
+           long_weight = self.long_read_weight * self._total_wt
+           long_read_np = np.array(self.long_read.iloc[:, 2])
+           long_read_np = long_weight * long_read_np
+           _pisum = self._pisum0 + _thetasum
+           _pi_denom = self._total_wt + self._pi_prior_wt * self.K
+           _pi_hat = (_pisum + self._pi_prior_wt + long_read_np) / _pi_denom
 
-        ### calculate TPM fraction based on mode selection
-        long_read_np = np.array(self.long_read.iloc[:, 2])
-        ### give option during integration
-        if self.long_read_integration_mode == "all":
-            _pi_hat = np.multiply(_pi_hat, long_read_np)
-            _theta_hat = np.multiply(_theta_hat, long_read_np)
-        elif self.long_read_integration_mode == "theta":
-            _theta_hat = np.multiply(_theta_hat, long_read_np)
+        elif self.prior_change == "theta":
+            long_weight = self.long_read_weight * self._ambig_wt
+            long_read_np = np.array(self.long_read.iloc[:, 2])
+            long_read_np = long_weight * long_read_np
+
+            _thetasum = _weighted.multiply(self.Y).sum(0)
+            _theta_denom = self._ambig_wt + self._theta_prior_wt * self.K
+            _theta_hat = (_thetasum + self._theta_prior_wt + long_read_np) / _theta_denom
+
+            # Estimate pi_hat
+            _pisum = self._pisum0 + _thetasum
+            _pi_denom = self._total_wt + self._pi_prior_wt * self.K
+            _pi_hat = (_pisum + self._pi_prior_wt) / _pi_denom
         else:
-            _pi_hat = _pi_hat
-            _theta_hat = _theta_hat
+            _thetasum = _weighted.multiply(self.Y).sum(0)
+            _theta_denom = self._ambig_wt + self._theta_prior_wt * self.K
+            _theta_hat = (_thetasum + self._theta_prior_wt) / _theta_denom
+
+            # Estimate pi_hat
+            _pisum = self._pisum0 + _thetasum
+            _pi_denom = self._total_wt + self._pi_prior_wt * self.K
+            _pi_hat = (_pisum + self._pi_prior_wt) / _pi_denom
         return _pi_hat.A1, _theta_hat.A1
 
     def calculate_lnl(self, z, pi, theta):
