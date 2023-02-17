@@ -63,18 +63,10 @@ Model Parameters:
                         To rescue features only captured by short, 
                         values can be given to 0 expression captured in long read.
                         (default: 0)
-  --long_read_type {matched,unmatched}
-                        Input whether cell or tissue type of long-read 
-                        is matched to that of short-read
-                        It is recommended to use "matched" 
-                        only when you have matched cell types or tissue samples 
-                        for long-read and short-read
-                        (default: matched)
   --long_read_weight {float}
-                        Only availble when choosing "unmatched" in integration mode. 
                         Weights on long-read information; No limited numeric ranges.
                         Useful when using different tissue samples.
-                        (default: 0.1)
+                        (default: 1)
   --prior_change {all,theta,none}
                         Integration of TPM counts from long reads. 
                         All represents change in both pi and theta.
