@@ -7,7 +7,7 @@ conda create -n lasTEq python=3.6 future pyyaml cython=0.29.7 numpy=1.16.3 panda
 
 conda activate lasTEq 
 conda install -c bioconda htslib
-conda install -c bioconda pysam
+pip install pysam
 git clone https://github.com/jasonwong-lab/lasTEq.git
 cd lasTEq
 python3 setup.py build | python3 setup.py install 
