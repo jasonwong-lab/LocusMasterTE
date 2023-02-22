@@ -190,6 +190,9 @@ class lasTEq(object):
             temp_common = pd.DataFrame(temp_common)
             temp_common.columns = ["TE name", "TPM Fraction", "subF Name"]
             temp_diff.columns = ["TE name", "TPM Fraction", "subF Name"]
+
+            ## set arbitrary subF so that they won't take into consideration during TPM fraction calculation
+            temp_diff["subF Name"] = "exclusive_short"
             frames = list()
             frames.append(temp_common)
             frames.append(temp_diff)
