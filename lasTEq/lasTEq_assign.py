@@ -167,7 +167,8 @@ class BulkIDOptions(IDOptions):
             type: float
             default: 1
             help: No limited numeric ranges. Weights on long-read information.
-                  Useful when using different tissue samples.
+                  Higher number is recommended when matched tissue or cell type long-read is inputted 
+                  Lower number is recommended when using different tissue samples.
         - rescue_short:
             type: float
             default: 0
