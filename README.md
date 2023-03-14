@@ -3,30 +3,30 @@ Before creating conda environment, please ensure packages are installed.
 
 
 ```
-conda create -n lasTEq python=3.6 future pyyaml cython=0.29.7 numpy=1.16.3 pandas=1.1.3 scipy=1.2.1 intervaltree=3.0.2
+conda create -n LocusMasterTE python=3.6 future pyyaml cython=0.29.7 numpy=1.16.3 pandas=1.1.3 scipy=1.2.1 intervaltree=3.0.2
 
-conda activate lasTEq 
+conda activate LocusMasterTE 
 conda install -c bioconda htslib
 pip install pysam
-git clone https://github.com/jasonwong-lab/lasTEq.git
-cd lasTEq
+git clone https://github.com/jasonwong-lab/LocusMasterTE.git
+cd LocusMasterTE
 python3 setup.py build | python3 setup.py install 
-lasTEq bulk assign -h
+LocusMasterTE bulk assign -h
 ```
 
 ## Testing
-```bash lasTEq/data/run_sample.sh```
+```bash LocusMasterTE/data/run_sample.sh```
 
 A BAM file (`sample_alignment_sort.bam`), annotation (`annotation.gtf`) and long read TPM file (`long_read_data.txt`) are included in
-lasTEq/data folder. \
+LocusMasterTE/data folder. \
 Recommended command line is written in bash file (`run_sample.sh`).
 
 ## Usage
-* [`lasTEq bulk assign`]
+* [`LocusMasterTE bulk assign`]
 
-lasTEq was built upon Telescope. Additional arguments are elaborated.
+LocusMasterTE was built upon Telescope. Additional arguments are elaborated.
 
-### lasTEq exclusive options:
+### LocusMasterTE exclusive options:
 
 ```
   long_read
@@ -53,7 +53,7 @@ lasTEq was built upon Telescope. Additional arguments are elaborated.
                         accepted; "unique" - only uniquely aligned reads are
                         included. "long_read" - use long read to determine best hit.
                         NOTE: Results using all assignment modes are
-                        included in the lasTEq report by default. This
+                        included in the LocusMasterTE report by default. This
                         argument determines what mode will be used for the
                         "final counts" column. (default: exclude)
 
@@ -151,5 +151,5 @@ Model Parameters:
 
 ## Output
 
-lasTEq has three main output files: the transcript counts estimated via EM (`lasteq-TE_counts.tsv`).\
+LocusMasterTE has three main output files: the transcript counts estimated via EM (`LocusMasterTE-TE_counts.tsv`).\
 The count file is most important for downstream analysis.
