@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-""" Setup lasTEq-ngs package
+""" Setup LocusMasterTE-ngs package
 
 """
 from __future__ import print_function
@@ -9,7 +9,7 @@ from distutils.core import setup
 from setuptools import Extension
 from setuptools import find_packages
 
-from lasTEq._version import VERSION
+from LocusMasterTE._version import VERSION
 
 __author__ = 'Sojung LEE'
 __copyright__ = "Copyright (C) 2023 Sojung LEE"
@@ -39,7 +39,7 @@ if USE_CYTHON:
     extensions = cythonize(extensions)
 
 setup(
-    name='lasTEq-ngs',
+    name='LocusMasterTE-ngs',
     version=VERSION.split('+')[0],
     packages=find_packages(),
 
@@ -56,7 +56,7 @@ setup(
     # Runnable scripts
     entry_points={
         'console_scripts': [
-            'lasTEq=lasTEq.__main__:main',
+            'LocusMasterTE=LocusMasterTE.__main__:main',
         ],
     },
 
@@ -65,20 +65,20 @@ setup(
 
     # data
     package_data = {
-        'lasTEq': [
+        'LocusMasterTE': [
             'data/alignment.bam',
             'data/annotation.gtf',
-            'data/lasTEq_report.tsv'
+            'data/LocusMasterTE_report.tsv'
         ],
     },
 
     # metadata for upload to PyPI
     author='Sojung LEE',
     author_email='sjlee98@connect.hku.hk',
-    description='long-read assisted short-read Transposable Elements quantification(lasTEq)',
+    description='long-read assisted short-read Transposable Elements quantification(LocusMasterTE)',
     license='MIT',
     keywords='',
-    url='https://github.com/jasonwong-lab/lasTEq',
+    url='https://github.com/jasonwong-lab/LocusMasterTE',
 
     zip_safe=False
 )
