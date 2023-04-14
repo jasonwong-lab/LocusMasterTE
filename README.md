@@ -66,7 +66,7 @@ Model Parameters:
   --long_read_weight {float}
                         Weights on long-read information; No limited numeric ranges.
                         Higher number is recommended when matched tissue or cell type long-read is inputted.
-                        Higher number is recommended when using different tissue samples.
+                        Lower number is recommended when using different tissue samples.
                         (default: 1)
   --prior_change {all,theta,none}
                         Integration of TPM counts from long reads. 
