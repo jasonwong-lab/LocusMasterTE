@@ -10,7 +10,7 @@ conda create -n LocusMasterTE python=3.6 future pyyaml cython=0.29.7 numpy=1.16.
 
 conda activate LocusMasterTE 
 conda install -c bioconda htslib
-conda install pysam
+pip install pysam==0.15.2
 git clone https://github.com/jasonwong-lab/LocusMasterTE.git
 cd LocusMasterTE
 python3 setup.py build | python3 setup.py install 
