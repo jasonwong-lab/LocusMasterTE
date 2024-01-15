@@ -24,6 +24,9 @@ A BAM file (`sample_alignment_sort.bam`), annotation (`annotation.gtf`) and long
 LocusMasterTE/data folder. \
 Recommended command line is written in bash file (`run_sample.sh`).
 
+## BAM file
+When inputting BAM file, it should be sorted by READ NAME
+
 ## Usage
 * [`LocusMasterTE bulk assign`]
 
