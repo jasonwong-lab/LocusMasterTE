@@ -25,7 +25,8 @@ LocusMasterTE/data folder. \
 Recommended command line is written in bash file (`run_sample.sh`).
 
 ## BAM file
-When inputting BAM file, it should be sorted by READ NAME
+When inputting BAM file, it should be sorted by READ NAME. Otherwise, LocusMasterTE does not work properly. 
+Aligned by coordinate also does not applicable. 
 
 ## Usage
 * [`LocusMasterTE bulk assign`]
