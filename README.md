@@ -25,7 +25,7 @@ First, tools need to be installed. You may refer website for installation. \
 * FeatureCounts : https://rnnh.github.io/bioinfo-notebook/docs/featureCounts.html
 
 \
-4 inputs are needed.
+4 inputs are needed. \
 ```
 1. Genomic FASTA
 2. Long Read FASTQ
