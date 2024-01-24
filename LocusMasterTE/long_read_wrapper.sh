@@ -25,6 +25,6 @@ featureCounts -T 5 -O -L -M -o $outdir/${name}_fc_output -a $GTF ${name}_process
 # convert output
 echo "Step 4: Convert to TPM"
 
-Rscript --vanilla LocusMasterTE/preprocessing_ONT.R --file=${name}_processed.bam --out=${name}_long_read_subF_TPM.txt
+Rscript --vanilla preprocessing_ONT.R --file=${name}_processed.bam --out=${name}_long_read_subF_TPM.txt
 
 echo "Finish Pre-processing Long-Read"
