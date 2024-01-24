@@ -25,14 +25,14 @@ First, tools need to be installed. You may refer website for installation. \
 * FeatureCounts : https://rnnh.github.io/bioinfo-notebook/docs/featureCounts.html
 
 \
-4 inputs are needed. \
+4 inputs are needed. 
 ```
 1. Genomic FASTA
 2. Long Read FASTQ
 3. Gene and TE GTF files
 4. Path to Output Directory
 ```
-Example code is below. 
+Example code is below. \
 ```bash LocusMasterTE/long_read_wrapper.sh hg38.fasta long_read.fastq.gz hg38.gtf output_path```
 
 If you have short-read FASTQ, here is the recommended code.
