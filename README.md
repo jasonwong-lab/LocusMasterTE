@@ -17,7 +17,7 @@ python3 setup.py build | python3 setup.py install
 LocusMasterTE bulk assign -h
 ```
 ## Preprocessing Wrapper
-LocusMasterTE provides a preprocessing wrapper script from Long-Read FASTQs to LocusMasterTE input. 
+LocusMasterTE provides a preprocessing wrapper script from Long-Read FASTQs to LocusMasterTE input. \
 ```bash LocusMasterTE/long_read_wrapper.sh ```
 
 If you have short-read FASTQ, here is the recommended code.
@@ -32,7 +32,7 @@ samtools collate -o Aligned_sort_name.out.bam --output-fmt BAM Aligned_sort.out.
 ```
 
 If you have short-read BAM file, BAM file needs to be sorted by read name. 
-Run command below. And output bam can be readily input in LocusMasterTE
+Run command below. And output bam can be readily input in LocusMasterTE. \
 ```samtools collate -o Aligned_sort_name.out.bam --output-fmt BAM Aligned_sort.out.bam```
 
 ## Testing
