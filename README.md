@@ -18,7 +18,7 @@ LocusMasterTE bulk assign -h
 ```
 ## Preprocessing Wrapper
 LocusMasterTE provides a preprocessing wrapper script from Long-Read FASTQs to LocusMasterTE input. \
-First, tools need to be installed. You may refer website for installation. \
+First, tools need to be installed. You may refer website for installation. 
 * Pychopper : https://github.com/epi2me-labs/pychopper
 * Minimap : https://github.com/lh3/minimap2
 * Samtools : https://www.htslib.org/
