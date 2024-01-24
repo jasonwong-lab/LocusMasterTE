@@ -16,9 +16,20 @@ cd LocusMasterTE
 python3 setup.py build | python3 setup.py install 
 LocusMasterTE bulk assign -h
 ```
-## Preprocessing
-If you have long-read FASTQs and short-read FASTQ, LocusMasterTE provides preprocessing scripts. 
-```bash LocusMasterTE/wrappers.sh ```
+## Preprocessing Wrapper
+LocusMasterTE provides a preprocessing wrapper script from Long-Read FASTQs to LocusMasterTE input. 
+```bash LocusMasterTE/long_read_wrapper.sh ```
+
+If you have short-read FASTQ, here is the recommended code.
+```
+STAR --runThreadN 20 --genomeDir $outdir/STAR_index \
+   --readFilesIn $short_fq1 $short_fq2 --readFilesCommand zcat --outFileNamePrefix STAR_output \
+   --outSAMtype BAM Unsorted --outSAMstrandField intronMotif --outSAMattributes All --outSAMattrIHstart 0 \
+   --outFilterMultimapNmax 100 --outFilterScoreMinOverLread 0.4 --outFilterMatchNminOverLread 0.4 --clip3pNbases 0 \
+   --winAnchorMultimapNmax 100 --alignEndsType EndToEnd --alignEndsProtrude 100 DiscordantPair --chimSegmentMin 250 --twopassMode Basic
+# sort by read name
+samtools collate -o Aligned_sort_name.out.bam --output-fmt BAM Aligned_sort.out.bam
+```
 
 If you have short-read BAM file, BAM file needs to be sorted by read name. 
 Run command below. And output bam can be readily input in LocusMasterTE
