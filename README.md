@@ -23,6 +23,7 @@ First, tools need to be installed. You may refer website for installation. \
 * Minimap : https://github.com/lh3/minimap2
 * Samtools : https://www.htslib.org/
 * FeatureCounts : https://rnnh.github.io/bioinfo-notebook/docs/featureCounts.html
+  \
 4 inputs are needed.
 ```
 1. Genomic FASTA
