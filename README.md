@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/595469794.svg)](https://doi.org/10.5281/zenodo.14785053)
+
 ## Paper
 https://www.biorxiv.org/content/10.1101/2023.03.21.533716v1
 
