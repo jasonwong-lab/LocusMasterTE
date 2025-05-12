@@ -1,7 +1,7 @@
 [![DOI](https://zenodo.org/badge/595469794.svg)](https://doi.org/10.5281/zenodo.14785053)
 
 ## Paper
-[https://www.biorxiv.org/content/10.1101/2023.03.21.533716v1](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-025-03522-9)
+[https://genomebiology.biomedcentral.com/articles/10.1186/s13059-025-03522-9](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-025-03522-9)
 
 ## Installation
 Before creating conda environment, please ensure packages are installed.
